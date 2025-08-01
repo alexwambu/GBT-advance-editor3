@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: app-builder-backend
+    env: python
+    buildCommand: pip install -r backend_requirements.txt
+    startCommand: uvicorn backend_main:app --host 0.0.0.0 --port 10000
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
+
+  - type: web
+    name: app-builder-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    plan: free
